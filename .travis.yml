@@ -1,0 +1,25 @@
+sudo: required
+language: c
+services:
+  - docker
+
+script:
+# Lint
+- docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
+- docker run -it --rm -v "$PWD/Dockerfile.onbuild:/Dockerfile:ro" redcoolbeans/dockerlint
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+after_success:
+# Setup
+  - export REPO=sp0x/portfolio
+  - export MAIN_TAG=`if [ "$TRAVIS_BRANCH" = "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - echo "Main tag - $MAIN_TAG | Commit (shorten) - $COMMIT | Branch - $TRAVIS_BRANCH"  - 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+# Build and deploy
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - cat Dockerfile | sed "s#sp0x/portfolio:latest#$REPO:$COMMIT#g" | docker build -t $REPO:$COMMIT-onbuild -
+  - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
+  - docker push $REPO
