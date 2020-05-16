@@ -5,8 +5,7 @@ services:
 
 script:
 # Lint
-- docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
-- docker run -it --rm -v "$PWD/Dockerfile.onbuild:/Dockerfile:ro" redcoolbeans/dockerlint
+- docker run -it --rm -v "Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
 
 env:
   global:
