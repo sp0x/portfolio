@@ -5,7 +5,6 @@ services:
 
 script:
 # Lint
-- ls -la
 - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
 
 env:
