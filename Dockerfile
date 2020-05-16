@@ -1,6 +1,6 @@
-FROM gatsbyjs/gatsby:onbuild as build
+FROM sp0x/gatsby:onbuild as build
 #We'll build the site here
 
 
-FROM gatsbyjs/gatsby
+FROM sp0x/gatsby
 COPY --from=build /app/public /pub
