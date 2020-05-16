@@ -3,9 +3,9 @@ language: c
 services:
   - docker
 
-#script:
+script:
 # Lint
-# - docker run -it --rm -v "Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
+  - docker run -it --rm -v "Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
 
 env:
   global:
