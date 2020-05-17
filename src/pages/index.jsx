@@ -121,7 +121,7 @@ export default props => {
             window.prismic = {}
             window.prismic["endpoint"] =  'https://vaskoportfolio.cdn.prismic.io/api/v2'
         </script>
-        <script type="text/javascript" src="https://static.cdn.prismic.io/prismic.min.js?new=true"></script>
+        <script async defer src=//static.cdn.prismic.io/prismic.min.js?repo=vaskoportfolio&new=true></script>
     </Layout>
   )
 }
