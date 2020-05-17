@@ -5,8 +5,8 @@ services:
 jobs:
   include:
     - stage: build docker image
-      env:
-        - REPOSITORY=vaskoportfolio
+      before_script:
+        - printenv | grep -vE "^(PATH=)|TRAVIS_" > .env
       script:
         # Lint
         - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
@@ -15,7 +15,7 @@ jobs:
         - echo "Main tag - $MAIN_TAG | Commit (shorten) - $COMMIT | Branch - $TRAVIS_BRANCH"  -
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         # Build and deploy
-        - env A=B docker build -t $REPO:$COMMIT .;
+        - docker build -t $REPO:$COMMIT .;
         - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
         - docker push $REPO
       after_success:
