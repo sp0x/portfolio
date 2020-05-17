@@ -117,6 +117,11 @@ export default props => {
         {htmlToReactParser.parse(description)}
         {sections}
       </div>
+        <script type="text/javascript">
+            window.prismic = {}
+            window.prismic["endpoint"] =  'https://vaskoportfolio.cdn.prismic.io/api/v2'
+        </script>
+        <script type="text/javascript" src="https://static.cdn.prismic.io/prismic.min.js?new=true"></script>
     </Layout>
   )
 }
