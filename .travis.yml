@@ -3,25 +3,30 @@ language: c
 services:
   - docker
 
-script:
-  # Lint
-  - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
-  - export REPO=sp0x/portfolio
-  - export MAIN_TAG=`if [ "$TRAVIS_BRANCH" = "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - echo "Main tag - $MAIN_TAG | Commit (shorten) - $COMMIT | Branch - $TRAVIS_BRANCH"  -
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  # Build and deploy
-  - REPOSITORY=${REPOSITORY} API_KEY=${API_KEY} docker build -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
-  - docker push $REPO
+jobs:
+  include:
+    - stage: build docker image
+      script:
+        # Lint
+        - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
+        - export REPO=sp0x/portfolio
+        - export MAIN_TAG=`if [ "$TRAVIS_BRANCH" = "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+        - echo "Main tag - $MAIN_TAG | Commit (shorten) - $COMMIT | Branch - $TRAVIS_BRANCH"  -
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        # Build and deploy
+        - docker build -t $REPO:$COMMIT .;
+        - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
+        - docker push $REPO
+      after_success:
+        # Setup
+        - curl -X POST "http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET"
 
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
+    - REPOSITORY=vaskoportfolio
 
-after_success:
-  # Setup
-  - curl -X POST "http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET"
+
 
 #notifications:
 #  webhooks:
