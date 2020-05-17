@@ -25,4 +25,4 @@ after_success:
 
 notifications:
   webhooks:
-   - http://vaskovasilev.eu:8885/webhook
+   - http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET
