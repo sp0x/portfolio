@@ -6,7 +6,7 @@ jobs:
   include:
     - stage: build docker image
       before_script:
-        - printenv | grep -vE "^(PATH=)|TRAVIS_" > .env
+        - printenv | grep -E "^(API_KEY=)|TRAVIS_TOKEN|TOKEN|REPOSITORY" > .env
       script:
         # Lint
         - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
