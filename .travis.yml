@@ -11,7 +11,7 @@ script:
   - echo "Main tag - $MAIN_TAG | Commit (shorten) - $COMMIT | Branch - $TRAVIS_BRANCH"  -
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # Build and deploy
-  - docker build -t $REPO:$COMMIT .
+  - REPOSITORY=${REPOSITORY} API_KEY=${API_KEY} docker build -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
   - docker push $REPO
 
