@@ -1,4 +1,3 @@
-sudo: required
 language: c
 services:
   - docker
@@ -6,6 +5,8 @@ services:
 jobs:
   include:
     - stage: build docker image
+      env:
+        - REPOSITORY=vaskoportfolio
       script:
         # Lint
         - docker run -it --rm -v "$PWD/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
