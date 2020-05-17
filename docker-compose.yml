@@ -13,13 +13,6 @@ services:
       - traefik.http.routers.portfolio.rule=Host(`portfolio.vaskovasilev.eu`) || Host(`vaskovasilev.eu`)
     restart: always
 
-  puller:
-    image: tuxity/docker-image-puller
-    env_file:
-      - .env
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
 networks:
   traefik:
     external:
