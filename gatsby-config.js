@@ -2,6 +2,8 @@ require('dotenv').config({
   path: `.env`,
 })
 
+console.log(process.env)
+
 module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
