@@ -4,6 +4,7 @@ services:
   site:
     build:
       context: .
+    image: sp0x/portfolio
     ports:
       - 8092:80
     networks:

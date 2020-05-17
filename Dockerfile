@@ -1,3 +1,5 @@
+ENV API_KEY ""
+ENV REPOSITORY ""
 FROM sp0x/gatsby:onbuild as build
 #We'll build the site here
 
