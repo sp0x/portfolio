@@ -20,7 +20,7 @@ jobs:
         - docker push $REPO
       after_success:
         # Setup
-        - curl -X POST "http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET"
+        - curl -X POST "http://vaskovasilev.eu:8885/images/pull?image=portfolio&restart_containers=true&token=$WEBHOOK_SECRET"
 
 env:
   global:
