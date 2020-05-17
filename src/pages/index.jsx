@@ -117,11 +117,6 @@ export default props => {
         {htmlToReactParser.parse(description)}
         {sections}
       </div>
-        <script type="text/javascript">
-            window.prismic = {}
-            window.prismic["endpoint"] =  'https://vaskoportfolio.cdn.prismic.io/api/v2'
-        </script>
-        <script async defer src=//static.cdn.prismic.io/prismic.min.js?repo=vaskoportfolio&new=true></script>
     </Layout>
   )
 }
