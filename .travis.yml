@@ -22,7 +22,7 @@ after_success:
   - cat Dockerfile | sed "s#sp0x/portfolio:latest#$REPO:$COMMIT#g" | docker build -t $REPO:$COMMIT-onbuild -
   - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
   - docker push $REPO
-  - curl -X POST http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET
+  - curl -X POST "http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET"
 
 #notifications:
 #  webhooks:
