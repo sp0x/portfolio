@@ -6,6 +6,7 @@ jobs:
   include:
     - stage: build docker image
       before_script:
+        #Dump the environment so the docker build can use it.
         - printenv | grep -E "^(API_KEY=)|TRAVIS_TOKEN|TOKEN|REPOSITORY" > .env
       script:
         # Lint
@@ -25,10 +26,7 @@ jobs:
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
-    - REPOSITORY=vaskoportfolio
-
-
 
 #notifications:
 #  webhooks:
-#   - http://vaskovasilev.eu:8885/images/pull?image=portfolio_site&restart_containers=true&token=$WEBHOOK_SECRET
+#   - http://vaskovasilev.eu:8885/images/pull?image=portfolio&restart_containers=true&token=$WEBHOOK_SECRET
