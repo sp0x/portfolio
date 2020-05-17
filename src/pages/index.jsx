@@ -56,7 +56,7 @@ const container = css`
   }
 
   .headline {
-    display: block;
+    display: inline-block;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 18px;
