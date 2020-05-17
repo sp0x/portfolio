@@ -12,8 +12,7 @@ script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # Build and deploy
   - env
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - cat Dockerfile | sed "s#sp0x/portfolio:latest#$REPO:$COMMIT#g" | docker build -t $REPO:$COMMIT-onbuild -
+  - docker build -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$MAIN_TAG
   - docker push $REPO
 
