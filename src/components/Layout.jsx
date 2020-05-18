@@ -138,14 +138,23 @@ const globalStyle = css`
   }
 `
 
-const Layout = ({ children }) => (
-  <div>
-    <Global styles={globalStyle} />
-    <Helmet>
-      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
-    </Helmet>
-    {children}
-  </div>
-)
+const Layout = ({children}) => {
+  //const children = o.children
+  // const title = data.site.siteMetadata.title
+  // const description = data.site.siteMetadata.description
+  // Load the Prismic edit button
+  if(typeof window !== 'undefined' && window.prismic) {
+    window.prismic.setupEditButton()
+  }
+  return (
+    <div>
+      <Global styles={globalStyle} />
+      <Helmet>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+      </Helmet>
+      {children}
+    </div>
+  )
+}
 
 export default Layout

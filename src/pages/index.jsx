@@ -1,6 +1,6 @@
-import { css } from '@emotion/core'
-import { graphql } from 'gatsby'
-import { Parser } from 'html-to-react'
+import {css} from '@emotion/core'
+import {graphql} from 'gatsby'
+import {Parser} from 'html-to-react'
 import React from 'react'
 import Layout from '../components/Layout'
 
@@ -83,11 +83,14 @@ const container = css`
 const htmlToReactParser = new Parser()
 
 export default props => {
-  const { data } = props
+  const {data} = props
   const content = data.prismicHomepage.data
   const name = content.name.text
   const description = content.description.html
+  const image = content.image.url
+  const imageAlt = content.image.alt
 
+  // eslint-disable-next-line array-callback-return
   const sections = content.body.map(section => {
     const title = section.primary.title.text
     const items = section.items.map(item => htmlToReactParser.parse(item.content.html))
@@ -110,10 +113,12 @@ export default props => {
     }
   })
 
+  const avatar = { backgroundImage: `url(${image})` }
   return (
     <Layout>
       <div css={container}>
         <h1>{name}</h1>
+        <div className="avatar" style={avatar}></div>
         {htmlToReactParser.parse(description)}
         {sections}
       </div>
@@ -130,6 +135,14 @@ export const pageQuery = graphql`
         }
         description {
           html
+        }
+        image {
+          alt
+          url
+          dimensions {
+            height
+            width
+          }
         }
         body {
           ... on PrismicHomepageBodySection {
