@@ -1,6 +1,25 @@
 .home-header {
   text-align: center;
 
+  .blog-avatar {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    margin: 1em auto;
+    float: right;
+  }
+
+  h1.name {
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  h1.name{
+    display: inline-block;
+  }
 
   .blog-description {
     font-size: 18px;
@@ -13,11 +32,3 @@
   }
 }
 
-.blog-avatar {
-  height: 140px;
-  width: 140px;
-  border-radius: 50%;
-  background-position: center;
-  background-size: cover;
-  margin: 1em auto;
-}

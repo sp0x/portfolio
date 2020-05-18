@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/core'
 import React from 'react'
 import Helmet from 'react-helmet'
+import '../../stylesheets/main.scss'
 
 const globalStyle = css`
   html,

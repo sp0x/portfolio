@@ -2,6 +2,9 @@ import {css} from '@emotion/core'
 import {graphql} from 'gatsby'
 import {Parser} from 'html-to-react'
 import React from 'react'
+import { RichText } from 'prismic-reactjs'
+import ReactMarkdown from "react-markdown";
+
 import Layout from '../components/Layout'
 
 const container = css`
@@ -9,13 +12,6 @@ const container = css`
   padding: 4rem 2rem 8rem 2rem;
   max-width: 600px;
   color: #333333;
-
-  h1 {
-    font-size: 30px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
 
   h2 {
     margin-top: 4rem;
@@ -81,6 +77,7 @@ const container = css`
 `
 
 const htmlToReactParser = new Parser()
+const { linkResolver } = require('../utils/linkResolver')
 
 export default props => {
   const {data} = props
@@ -89,6 +86,9 @@ export default props => {
   const description = content.description.html
   const image = content.image.url
   const imageAlt = content.image.alt
+  console.log(content)
+  const rawMarkdown = RichText.asText([content.badgetext])
+  const badges = <ReactMarkdown source={rawMarkdown} />
 
   // eslint-disable-next-line array-callback-return
   const sections = content.body.map(section => {
@@ -117,8 +117,11 @@ export default props => {
   return (
     <Layout>
       <div css={container}>
-        <h1>{name}</h1>
-        <div className="avatar" style={avatar}></div>
+        <div className="home-header">
+          <h1 className="name">{name}</h1>
+          <div className="blog-avatar" style={avatar}></div>
+          {badges}
+        </div>
         {htmlToReactParser.parse(description)}
         {sections}
       </div>
@@ -130,6 +133,9 @@ export const pageQuery = graphql`
   query {
     prismicHomepage {
       data {
+        badgetext {
+          text
+        }
         name {
           text
         }
