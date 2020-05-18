@@ -36,6 +36,9 @@ env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
 
+notifications:
+  slack: hometeamx:u1uHO9HS26OJKiBoMlahWu1G
+
 #notifications:
 #  webhooks:
 #   - http://vaskovasilev.eu:8885/images/pull?image=portfolio&restart_containers=true&token=$WEBHOOK_SECRET
