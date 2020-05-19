@@ -29,5 +29,11 @@ module.exports = {
         path: `./src/images`,
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: '',
+      },
+    },
   ],
 }

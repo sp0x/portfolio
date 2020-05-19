@@ -6,6 +6,7 @@ import { RichText } from 'prismic-reactjs'
 import ReactMarkdown from 'react-markdown'
 
 import Layout from '../components/Layout'
+import ContactForm from '../components/ContactForm'
 
 const container = css`
   margin: 0 auto;
@@ -123,6 +124,7 @@ export default props => {
         {htmlToReactParser.parse(description)}
         <div className="badges">{badges}</div>
         {sections}
+        <ContactForm action="https://www.flexyform.com/f/41ac91a5b09555b0388de190f829425404db5c82" />
       </div>
     </Layout>
   )
