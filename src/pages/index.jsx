@@ -120,9 +120,11 @@ export default props => {
         <div className="home-header">
           <h1 className="name">{name}</h1>
           <div className="blog-avatar" style={avatar}></div>
-          {badges}
         </div>
         {htmlToReactParser.parse(description)}
+        <div className="badges">
+          {badges}
+        </div>
         {sections}
       </div>
     </Layout>

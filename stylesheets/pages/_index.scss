@@ -30,5 +30,19 @@
     font-family: $font-sans-serif;
     border-bottom: 1px solid #DADADA;
   }
+
+
+}
+.badges{
+  text-align: right;
+
+  p{
+    display: inline-block;
+    margin-right: 1rem;
+    img{
+      height: 40px;
+      width: 40px;
+    }
+  }
 }
 
