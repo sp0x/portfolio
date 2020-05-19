@@ -4,10 +4,17 @@
 
 exports.linkResolver = function linkResolver(doc) {
   // Route for blog posts
+  console.log(doc)
   if (doc.type === 'post') {
     return `/blog/${doc.uid}`
+  }
+  if (typeof doc === 'string') {
+    return doc
   }
 
   // Homepage route fallback
   return '/'
+}
+exports.imageResolver = function imageResolver(link) {
+  return link.startsWith('http') ? link : `${link}`
 }

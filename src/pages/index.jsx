@@ -3,7 +3,7 @@ import {graphql} from 'gatsby'
 import {Parser} from 'html-to-react'
 import React from 'react'
 import { RichText } from 'prismic-reactjs'
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from 'react-markdown'
 
 import Layout from '../components/Layout'
 
@@ -77,7 +77,7 @@ const container = css`
 `
 
 const htmlToReactParser = new Parser()
-const { linkResolver } = require('../utils/linkResolver')
+const { linkResolver, imageResolver } = require('../utils/linkResolver')
 
 export default props => {
   const {data} = props
@@ -86,9 +86,8 @@ export default props => {
   const description = content.description.html
   const image = content.image.url
   const imageAlt = content.image.alt
-  console.log(content)
   const rawMarkdown = RichText.asText([content.badgetext])
-  const badges = <ReactMarkdown source={rawMarkdown} />
+  const badges = <ReactMarkdown transformImageUri={imageResolver} source={rawMarkdown} />
 
   // eslint-disable-next-line array-callback-return
   const sections = content.body.map(section => {
@@ -122,9 +121,7 @@ export default props => {
           <div className="blog-avatar" style={avatar}></div>
         </div>
         {htmlToReactParser.parse(description)}
-        <div className="badges">
-          {badges}
-        </div>
+        <div className="badges">{badges}</div>
         {sections}
       </div>
     </Layout>
